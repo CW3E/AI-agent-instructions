@@ -2,7 +2,7 @@
 
 Context and instruction guides for AI assistants working with CW3E computing systems, processes, & procedures.
 
-These guides provide the environment details and local conventions an assistant needs before coding, providing advice, generating documentation, etc. T
+These guides provide the environment details and local conventions an assistant needs before coding, providing advice, generating documentation, etc.
 
 ## Available guides
 
