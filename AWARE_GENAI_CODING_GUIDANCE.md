@@ -107,9 +107,9 @@ Example: if 100 requested locations all need data from the same collection of mo
 
 - Give workers distinct output and temporary paths. Use one writer per ordinary output file unless the selected format, library, and implementation explicitly support coordinated parallel writes.
 - Batch tiny output records where practical. Choose output grouping that also supports the next analysis step, rather than creating avoidable rereads or an oversized shared output bottleneck.
-- On `awr-2-*` nodes, consider `/scratch` for reused inputs and repeated intermediate I/O. Check available space and budget for staged inputs, temporary data, and outputs across concurrent workers. Use job/task-specific subdirectories to avoid collisions with other jobs.
-- Each node has its own `/scratch`; the same pathname on another node does not refer to the same data. Coordinate staging so workers within a job reuse a local input copy where practical. Include staging costs; copying the same large dataset separately for every small task can increase total BeeGFS traffic.
-- Treat local scratch as temporary: copy retained results to BeeGFS before the job exits and clean up only the temporary directories created by that job. Do not assume an automatic cleanup schedule. A directory called `scratch` under a BeeGFS project is still shared storage; `/tmp` and `$TMPDIR` are not established substitutes for `/scratch`.
+- On `awr-2-*` nodes, consider `/scratch/${SLURM_JOB_USER}` for reused inputs and repeated intermediate I/O. Check available space and budget for staged inputs, temporary data, and outputs across concurrent workers. Use job/task-specific subdirectories to avoid collisions with other jobs.
+- Each node has its own `/scratch/${SLURM_JOB_USER}`; the same pathname on another node does not refer to the same data. Coordinate staging so workers within a job reuse a local input copy where practical. Include staging costs; copying the same large dataset separately for every small task can increase total BeeGFS traffic.
+- Treat local scratch as temporary: copy retained results to BeeGFS before the job exits and clean up only the temporary directories created by that job. Do not assume an automatic cleanup schedule. A directory called `scratch` under a BeeGFS project is still shared storage; `/tmp` and `$TMPDIR` are not established substitutes for `/scratch/${SLURM_JOB_USER}`.
 
 ## Verify at the intended scale
 
